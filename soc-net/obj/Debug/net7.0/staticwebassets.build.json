@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "mpiofOzM8kKDGa96T3UciEuLBLtsiUxI7F90IujTqEo=",
+  "Source": "soc-net",
+  "BasePath": "_content/soc-net",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

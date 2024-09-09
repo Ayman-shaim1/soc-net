@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{8A0EBC4A-D717-4A84-B2C3-715E27068005}|https">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="soc-net/Controllers/PostController.cs">
+    <Files>
+      <File FileName="soc-net/Controllers/AuthController.cs" Line="4" Column="32" />
+      <File FileName="soc-net/Program.cs" Line="66" Column="1" />
+      <File FileName="soc-net/Controllers/PostController.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="soc-net" expanded="True">
+            <Node name="soc-net" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="PostController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.soc-net PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+</Properties>
