@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using soc_net.Models;
 
@@ -10,9 +11,11 @@ using soc_net.Models;
 namespace socnet.Migrations
 {
     [DbContext(typeof(SocNetContext))]
-    partial class SocNetContextModelSnapshot : ModelSnapshot
+    [Migration("20240910170357_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

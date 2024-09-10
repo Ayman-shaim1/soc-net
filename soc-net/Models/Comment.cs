@@ -5,26 +5,25 @@ using System.Text.Json.Serialization;
 
 namespace soc_net.Models
 {
-	public class Post
-	{
+	public class Comment
+    {
         [Key]
         public int Id { get; set; }
-        public string Textcontent { get; set; }
-		public DateTime date { get; set; }
+        public string textcontent { get; set; }
+        public DateTime date { get; set; }
         public int userId { get; set; }
+        public int postId { get; set; }
 
-      
-        public List<PostLike> Likes { get; set; }
-        public List<Comment> Comments { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("userId")]
         public User user { get; set; }
 
-       
+        [JsonIgnore]
+        [ForeignKey("postId")]
+        public Post post { get; set; }
 
-        public Post()
-		{
-		}
+        public Comment() {}
 	}
 }
 

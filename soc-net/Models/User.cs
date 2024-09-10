@@ -12,8 +12,8 @@ namespace soc_net.Models
 		public string Password { get; set; }
 		public string? Image { get; set; }
 
-
-		public ICollection<Post>? posts { get; set; }
+        public ICollection<PostLike>? LikedPosts { get; set; }
+        public ICollection<Post>? posts { get; set; }
 
 		public User()
 		{

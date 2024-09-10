@@ -16,11 +16,16 @@ namespace soc_net.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<PostLike> PostLikes { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Configure entity properties and relationships here
+            modelBuilder.Entity<PostLike>()
+               .HasKey(pl => new { pl.PostId, pl.UserId });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
