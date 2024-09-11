@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Mysqlx.Crud;
 using soc_net.Models;
 
 
@@ -24,16 +25,72 @@ namespace soc_net.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _context.Posts
-                  
-                    .ToListAsync());
+            var posts = await _context.Posts
+                        .Include(p => p.user)
+                            .Include(p => p.Comments)
+                            .Include(p => p.Likes)
+                       
+                            .Select(p => new
+                            {
+                                Id = p.Id,
+                                Textcontent = p.Textcontent,
+                                Date = p.date,
+                                User = new
+                                {
+                                    Id = p.user.Id,
+                                    Name = p.user.Name,
+                                    Image = p.user.Image
+                                },
+                                Comments = p.Comments.Select(c => new
+                                {
+                                    Id = c.Id,
+                                    Textcontent = c.textcontent,
+                                    Date = c.date,
+                                }).ToArray(),
+                                Likes = p.Likes.Select(l => new
+                                {
+                                    userId = l.UserId,
+                                }).ToArray()
+                            })
+                            .ToListAsync();
+
+            return Ok(posts);
         }
 
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await _context.Posts.FirstOrDefaultAsync(p => p.Id == id));
+            var post = await _context.Posts
+                  .Include(p => p.user)
+                      .Include(p => p.Comments)
+                      .Include(p => p.Likes)
+                      .Where(p => p.Id == id)
+                      .Select(p => new
+                      {
+                          Id = p.Id,
+                          Textcontent = p.Textcontent,
+                          Date = p.date,
+                          User = new
+                          {
+                              Id = p.user.Id,
+                              Name = p.user.Name,
+                              Image = p.user.Image
+                          },
+                          Comments = p.Comments.Select(c => new
+                          {
+                              Id = c.Id,
+                              Textcontent = c.textcontent,
+                              Date = c.date,
+                          }).ToArray(),
+                          Likes = p.Likes.Select(l => new
+                          {
+                              userId = l.UserId,
+                          }).ToArray()
+                      })
+                      .FirstOrDefaultAsync();
+
+            return Ok(post);
         }
 
         [HttpPut("{id}/toggle/like")]
