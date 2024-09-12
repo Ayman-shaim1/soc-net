@@ -29,7 +29,7 @@ namespace soc_net.Controllers
                         .Include(p => p.user)
                             .Include(p => p.Comments)
                             .Include(p => p.Likes)
-                       
+                             .OrderByDescending(p => p.date)
                             .Select(p => new
                             {
                                 Id = p.Id,
