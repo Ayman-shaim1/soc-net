@@ -34,6 +34,7 @@ namespace soc_net.Controllers
                 string passwordHach = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 User userToAdd = new()
                 {
+                 
                     Name = user.Name,
                     Email = user.Email,
                     Password = passwordHach
@@ -55,9 +56,10 @@ namespace soc_net.Controllers
 
                 _context.Users.Add(userToAdd);
                 await _context.SaveChangesAsync();
-
+                
                 return Ok(new
                 {
+                    Id = userToAdd.Id,
                     name = userToAdd.Name,
                     email = userToAdd.Email,
                     image = userToAdd.Image,
@@ -91,6 +93,7 @@ namespace soc_net.Controllers
                     };
                     var token = tokenHandler.CreateToken(tokenDescriptor);
                     return Ok(new {
+                        Id = findUser.Id,
                         name = findUser.Name,
                         email = findUser.Email,
                         image = findUser.Image,

@@ -21,7 +21,7 @@ namespace soc_net.Controllers
             _context = context;
         }
 
-
+   
         [HttpGet]
         public async Task<IActionResult> Get()
         {
