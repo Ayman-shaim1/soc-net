@@ -62,33 +62,40 @@ namespace soc_net.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var post = await _context.Posts
-                  .Include(p => p.user)
-                      .Include(p => p.Comments)
-                      .Include(p => p.Likes)
-                      .Where(p => p.Id == id)
-                      .Select(p => new
-                      {
-                          Id = p.Id,
-                          Textcontent = p.Textcontent,
-                          Date = p.date,
-                          User = new
-                          {
-                              Id = p.user.Id,
-                              Name = p.user.Name,
-                              Image = p.user.Image
-                          },
-                          Comments = p.Comments.Select(c => new
-                          {
-                              Id = c.Id,
-                              Textcontent = c.textcontent,
-                              Date = c.date,
-                          }).ToArray(),
-                          Likes = p.Likes.Select(l => new
-                          {
-                              userId = l.UserId,
-                          }).ToArray()
-                      })
-                      .FirstOrDefaultAsync();
+                   .Include(p => p.user)
+                       .Include(p => p.Comments)
+                         .ThenInclude(c => c.user)
+                       .Include(p => p.Likes)
+                       .Where(p => p.Id == id)
+                       .Select(p => new
+                       {
+                           Id = p.Id,
+                           Textcontent = p.Textcontent,
+                           Date = p.date,
+                           User = new
+                           {
+                               Id = p.user.Id,
+                               Name = p.user.Name,
+                               Image = p.user.Image
+                           },
+                           Comments = p.Comments.Select(c => new
+                           {
+                               Id = c.Id,
+                               Textcontent = c.textcontent,
+                               Date = c.date,
+                               User = new
+                               {
+                                   Id = c.user.Id,
+                                   Name = c.user.Name,
+                                   Image = c.user.Image
+                               }
+                           }).OrderByDescending(c => c.Date).ToArray(),
+                           Likes = p.Likes.Select(l => new
+                           {
+                               userId = l.UserId,
+                           }).ToArray()
+                       })
+                       .FirstOrDefaultAsync();
 
             return Ok(post);
         }
